@@ -1,0 +1,45 @@
++ Routing
+    - cài đặt thư viện để routing chuyển trang npm i react-router-dom
++ B1: Lấy id từ url khi được gửi lên từ link button
+    - lấy callapi config từ setting/apiConfig
+    - truyền BASE_URL vào callApi,groupID vào api ở fetchApi
++ B2: loading data
+    - call API componentDidMount( hoặc tạo file apis để quản lý)
+    - PageNotFound
+* componentDidMount có data truyền tham số xuống để fetch có thể dispatch và sau đó truyền vào action nhận được
++ B3: mapDispatchToProps và mapStateToProps lên reducer
+* Dữ liệu là phần cần show ra cho người dùng hiểu, thông tin là dữ liệu đã được chuyển hóa
++ B4: lấy data về show ra, render
+* thư viện moment npm
+* mấy cái root phải có key
++ B5: có button của từng giờ, link sẽ dẫn đến render ra phongChieu
+* reducer chỉ chấp nhận 1 cái plan object
+* middleware: nằm giữa reducer và action làm việc kiểm tra call API trả về 1 cái obj nên mới có thể dispatch được
++ B6: setup 1 cái redux-thunk thân
+    - import applyMiddleware } from 'redux'
+    - import {composeWithDevTools} from 'redux-devtools-extension';
+    - import thunk from 'redux-thunk';
+
+* mapDispatchToProps gửi action thông qua middleware lên reducer, reducer lựa type và sử lý
+
+* Hook: giúp function làm được những cái không làm được giống class (statefull, stateless)
+* memo: lưu lại input vào cached rồi ktra có cái input nào giống vậy chưa
+* dev-dependencies: tool sử dụng 1 lần
+* Closure hay Currying Function: 1 func được viết trong 1 cái func khác
+* HOC: 1 cái function nhận vào 1 cái component , trả component khác đó được cải tiến , xử lý logic giống nhau, còn output input định nghĩa lại khác nhau
+    - Ưu điểm: tái sd logic có kq sẽ truyền props xuống
+    - Nhược điểm: rất khó hiểu và khó debug
+    - flow của HOC: nó nhận vào 1 component không có data, truyền vào HOC để xử lý rồi trả về compoent với cái prop là data, bên component nhận được prop data đó rồi render nó ra.
+* SOLID => design principle
+* Những cái component truyền trong cái Route đều được pass cái props(match, history)
+* Quy tắc đặt tên version thư viện:  sematic versioning
+* Thư viện redux persist: lưu dưới localStorage
+* Component không được bọc bởi Route không có history thì dùng component withRouter
+* Tạo ra 1 cái HOC bọc lại ClientLayout, renderLayout truyền vào 2 cái
+* React 16: 
+    1/ Làm chặn route đăng nhập vào seatplan
+    - thêm thuộc tính isPrivate tại ClientRoutes, app.js
+    - Kiểm tra thuộc tính isPrivate tại withLayout, nếu đã đăng nhập thì trả về content, chưa thì hiện pop up và Redirect vào trang login
+    2/ chặn vào route login rồi khi chưa login
+    3/ Làm AdminLayout
+    4/ Thêm token ở callApi có thuộc tính headers AddUser api và lấy api về
